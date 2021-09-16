@@ -39,6 +39,10 @@
                                         <select name="class" id="class" class="input">
                                             <option value="">Select Class</option>
                                             <?php
+                                                require_once("../Database/Class.php");
+                                                require_once("../Database/Subject.php");
+                                                $classes = new Classes();
+                                                $subjects = new Subjects;
                                                 $data = $classes->getAllClasses();
                                                 foreach($data as $row)
                                                 {
@@ -47,6 +51,10 @@
                                             ?>    
                                         </select>
                                     </div>
+                                    <div class="feild">
+                                        <label for="" class="label">Subject Name</label>
+                                        <input type="text" name="subject" id="subject" class="input">
+                                    </div>
                                     <br>
                                     <div class="feild">
                                         <button name="submit" class="button is-success">
@@ -54,41 +62,44 @@
                                         </button>
                                     </div>
                                 </form>
-                            </div>
-                            <?php
-                                $message = "";
-                                include("../Database/Class.php");
-                                $classes = new Classes();
-                                if(isset($_POST['submit'])){
-                                    $classnumber = $_POST['class'];
-                                    $message = $classes->addClass($classnumber);
+                                <?php
+                                if(isset($_POST['submit']))
+                                {
+                                    $message = "";
+                                    $class = $_POST['class'];
+                                    $subject = $_POST['subject'];
+                                    $message = $subjects->addSubject($class, $subject);
+                                    echo $message;
                                 }
-                                echo $message;    
                                 ?>
 
+                            </div>
                         </div>
                     </div>
 
                     <br />
                     <div class="card">
                         <div class="card-header">
-                            <p class="card-header-title">Availble Classes</p>
+                            <p class="card-header-title">Availble Subjects</p>
                         </div>
                         <div class="card-content">
                             <?php
-                            $data = $classes->getAllClasses();
-                            foreach($data as $row){
+                            $data =$subjects->getSubjects();
+                            foreach($data as $row)
+                            {
                                 echo "<div class='columns is-multiline is-mobile is-fullwidth'>";
-                                echo "<div class='column is-half'>";
+                                echo "<div class='column is-one-third'>";
+                                echo $row['name'];
+                                echo "</div>";
+                                echo "<div class='column is-one-third'>";
                                 echo $row['classno'];
                                 echo "</div>";
-                                echo "<div class='column is-half'>";
-                                echo "<button class='button is-small is-danger' onclick='window.location.href=\"deleteclass.php?classno=".$row['classno']."\"'>Delete</button>";
+                                echo "<div class='column is-one-third'>";
+                                echo "<button class='button is-small is-danger' onclick='window.location.href=\"deletesubject.php?classno=".$row['classno']."&name=".$row['name']."\"'>Delete</button>";
                                 echo "</div>";
                                 echo "</div>";
                                 echo "</div>";
                             }
-
                             ?>
 
                         </div>
