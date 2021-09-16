@@ -29,7 +29,7 @@
                             </li>
                             <li>
                                 <a href="result.php">
-                                    <span class="icon is-small"><i class="fa fa-link"></i></span> Manage Result
+                                    <span class="icon is-small"><i class="fa fa-link"></i></span> Results
                                 </a>
                             </li>
                             
