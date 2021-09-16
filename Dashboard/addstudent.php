@@ -117,9 +117,7 @@
                                 echo "</div>";
                                 echo "</div>";
                             }
-
                             ?>
-
                         </div>
                     </div>
                     <br />
