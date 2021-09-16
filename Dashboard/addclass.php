@@ -77,7 +77,6 @@
                                 echo "<button class='button is-small is-danger' onclick='window.location.href=\"deleteclass.php?classno=".$row['classno']."\"'>Delete</button>";
                                 echo "</div>";
                                 echo "</div>";
-                                echo "</div>";
                             }
 
                             ?>

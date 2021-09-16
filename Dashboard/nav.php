@@ -28,8 +28,8 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
-                                    <span class="icon is-small"><i class="fa fa-link"></i></span> Mark Attendence
+                                <a href="result.php">
+                                    <span class="icon is-small"><i class="fa fa-link"></i></span> Manage Result
                                 </a>
                             </li>
                             
