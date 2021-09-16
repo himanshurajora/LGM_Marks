@@ -29,14 +29,23 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <p class="card-header-title">Add Class</p>
+                            <p class="card-header-title">Add Subject</p>
                         </div>
                         <div class="card-content">
                             <div class="container">
                                 <form action="" method="post">
                                     <div class="feild">
                                         <label for="" class="label">Class No.</label>
-                                        <input type="number" class="input" placeholder="eg: 4, 7 etc" name="class" required>
+                                        <select name="class" id="class" class="input">
+                                            <option value="">Select Class</option>
+                                            <?php
+                                                $data = $classes->getAllClasses();
+                                                foreach($data as $row)
+                                                {
+                                                    echo "<option value='".$row['classno']."'>".$row['classno']."</option>";
+                                                }
+                                            ?>    
+                                        </select>
                                     </div>
                                     <br>
                                     <div class="feild">
