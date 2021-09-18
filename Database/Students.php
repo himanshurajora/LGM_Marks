@@ -12,7 +12,7 @@
             return $statement->fetchAll(PDO::FETCH_ASSOC);
         }
         public function getStudentByClassno($classno){
-            $query = "SELECT * FROM students WHERE classno = :classno";
+            $query = "SELECT * FROM students WHERE classno = :classno ORDER BY name";
             $statement = $this->connect->prepare($query);
             $statement->bindParam(':classno', $classno, PDO::PARAM_INT);
             $statement->execute();
