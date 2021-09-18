@@ -38,39 +38,31 @@
                                 <form action="" method="post">
                                     <div class="feild">
                                         <label for="" class="label">Subjects</label>
-                                            <?php
-                                            require_once('../Database/Subject.php');
-                                            $classes = new Classes();
-                                            $students = new Students();
-                                            $subjects = new Subjects();
-                                            $clasno = $_GET['classno'];
-                                            $data = $subjects->getSubjectsInClass($clasno);                                            
-                                            foreach ($data as $row) {
-                                                echo '<label class="label">Enter Marks of '.$row['name'].'</label><input class="input" type="number" value="" name="'.$row['name'].'"/>';
-                                            }
+                                        <?php
+                                        require_once('../Database/Subject.php');
+                                        require_once('../Database/Marks.php');
+                                        $classes = new Classes();
+                                        $students = new Students();
+                                        $subjects = new Subjects();
+                                        $marks = new Marks();
+                                        $clasno = $_GET['classno'];
+                                        $data = $subjects->getSubjectsInClass($clasno);
+                                        foreach ($data as $row) {
+                                            echo '<label class="label">Enter Marks of ' . $row['name'] . '</label><input class="input" type="number" value="" name="' . $row['name'] . '"/>';
+                                        }
 
 
 
-                                            if (isset($_POST['submit'])) {
-                                                $classno = $_POST['classno'];
-                                                $data = $students->getStudentByClassno($classno);
-                                                foreach ($data as $row) {
-                                                    echo "<div class='columns is-multiline is-mobile is-fullwidth'>";
-                                                    echo "<div class='column'>";
-                                                    echo $row['name'];
-                                                    echo "</div>";
-                                                    echo "<div class='column'>";
-                                                    echo $row['classno'];
-                                                    echo "</div>";
-                                                    echo "<div class='column'>";
-                                                    echo "<button class='button is-small is-danger' onclick='window.location.href=\"deletestudent.php?id=" . $row['id'] . "\"'>Delete</button>";
-                                                    echo "</div>";
-                                                    echo "</div>";
+                                        if (isset($_POST['submit'])) {
+                                            foreach ($_POST as $key => $value) {
+                                                if ($key != 'submit') {
+                                                    $marks->insertMarks($_GET['classno'], $_GET['rollno'], $key, $value);
                                                 }
                                             }
+                                        }
 
 
-                                            ?>
+                                        ?>
                                         </select>
                                     </div>
 
@@ -91,22 +83,36 @@
                             <p class="card-header-title">Previous Result</p>
                         </div>
                         <div class="card-content">
+                            <?php
+                            $data = $marks->getMarks($_GET['rollno']);
+                            foreach ($data as $row) {
+                                echo "<div class='columns is-multiline'>";
+                                echo "<div class='column'>";
+                                echo $row['subject'];
+                                echo "</div>";
+                                echo "<div class='column'>";
+                                echo '<strong>'.$row['marks'].'</strong>';
+                                echo "</div>";
+                                echo "</div>";
+                            }
 
+                            ?>
                         </div>
                     </div>
-                    <br />
                 </div>
+                <br />
             </div>
+    </div>
 
-        </section>
+    </section>
 
-        <footer class="footer is-hidden">
-            <div class="container">
-                <div class="content has-text-centered">
-                    <p>Hello</p>
-                </div>
+    <footer class="footer is-hidden">
+        <div class="container">
+            <div class="content has-text-centered">
+                <p>Hello</p>
             </div>
-        </footer>
+        </div>
+    </footer>
 
     </div>
 

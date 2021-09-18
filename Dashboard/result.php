@@ -87,7 +87,7 @@
                                     echo $row['rollno'];
                                     echo "</div>";
                                     echo "<div class='column'>";
-                                    echo "<button class='button is-small is-warning' onclick='window.location.href=\"updateresult.php?id=" . $row['id'] . "&classno=".$row['classno']."\"'>Update</button>";
+                                    echo "<button class='button is-small is-warning' onclick='window.location.href=\"updateresult.php?id=" . $row['id'] .  "&rollno=".$row['rollno']."&classno=".$row['classno']."\"'>Update</button>";
                                     echo "</div>";
                                     echo "</div>";
                                 }
