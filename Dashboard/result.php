@@ -31,7 +31,7 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <p class="card-header-title">Update Result</p>
+                            <p class="card-header-title">Select a class</p>
                         </div>
                         <div class="card-content">
                             <div class="container">
