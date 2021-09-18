@@ -69,7 +69,7 @@
                                     <br>
                                     <div class="feild">
                                         <button name="submit" class="button is-success">
-                                            List Students
+                                            Update Result
                                         </button>
                                     </div>
                                 </form>
