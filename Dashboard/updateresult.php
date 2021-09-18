@@ -84,7 +84,7 @@
                         </div>
                         <div class="card-content">
                             <?php
-                            $data = $marks->getMarks($_GET['rollno']);
+                            $data = $marks->getMarks($_GET['rollno'], $_GET['classno']);
                             foreach ($data as $row) {
                                 echo "<div class='columns is-multiline'>";
                                 echo "<div class='column'>";
