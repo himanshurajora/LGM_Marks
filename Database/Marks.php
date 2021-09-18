@@ -7,10 +7,11 @@ class Marks{
         $connection = new Connection;
         $this->connect = $connection->connect();
     }
-    function getMarks($rollno){
-        $query = "SELECT * FROM marks WHERE rollno=:rollno";
+    function getMarks($rollno, $classno){
+        $query = "SELECT subject, marks FROM marks WHERE rollno=:rollno AND classno=:classno";
         $stmt = $this->connect->prepare($query);
         $stmt->bindParam(":rollno",$rollno);
+        $stmt->bindParam(":classno",$classno);
         $stmt->execute();
         $result = $stmt->fetchAll();
         return $result;
@@ -34,6 +35,17 @@ class Marks{
         $stmt->execute();
     }
 
+    // get total marks for a student with rollno and classno
+    function getTotalMarks($rollno, $classno){
+        $query = "SELECT sum(marks) as total FROM marks WHERE rollno=:rollno AND classno=:classno";
+        $stmt = $this->connect->prepare($query);
+        $stmt->bindParam(":rollno",$rollno);
+        $stmt->bindParam(":classno",$classno);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result['total'];
+    }
+    
     //Queries that could be used
 
     // function updateMarks($classno, $rollno, $subject, $marks){
