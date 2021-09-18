@@ -31,22 +31,44 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <p class="card-header-title">Add Students</p>
+                            <p class="card-header-title">Update Result</p>
                         </div>
                         <div class="card-content">
                             <div class="container">
                                 <form action="" method="post">
                                     <div class="feild">
-                                        <label for="" class="label">Class</label>
-                                        <select name="classno" id="input" class="input">
-                                            <option value="">Select Class</option>
+                                        <label for="" class="label">Subjects</label>
                                             <?php
+                                            require_once('../Database/Subject.php');
                                             $classes = new Classes();
                                             $students = new Students();
-                                            $data = $classes->getAllClasses();
-                                            foreach ($data as $class) {
-                                                echo "<option value='" . $class['classno'] . "'>" . $class['classno'] . "</option>";
+                                            $subjects = new Subjects();
+                                            $clasno = $_GET['classno'];
+                                            $data = $subjects->getSubjectsInClass($clasno);                                            
+                                            foreach ($data as $row) {
+                                                echo '<label class="label">Enter Marks of '.$row['name'].'</label><input class="input" type="number" value="" name="'.$row['name'].'"/>';
                                             }
+
+
+
+                                            if (isset($_POST['submit'])) {
+                                                $classno = $_POST['classno'];
+                                                $data = $students->getStudentByClassno($classno);
+                                                foreach ($data as $row) {
+                                                    echo "<div class='columns is-multiline is-mobile is-fullwidth'>";
+                                                    echo "<div class='column'>";
+                                                    echo $row['name'];
+                                                    echo "</div>";
+                                                    echo "<div class='column'>";
+                                                    echo $row['classno'];
+                                                    echo "</div>";
+                                                    echo "<div class='column'>";
+                                                    echo "<button class='button is-small is-danger' onclick='window.location.href=\"deletestudent.php?id=" . $row['id'] . "\"'>Delete</button>";
+                                                    echo "</div>";
+                                                    echo "</div>";
+                                                }
+                                            }
+
 
                                             ?>
                                         </select>
@@ -66,28 +88,10 @@
                     <br />
                     <div class="card">
                         <div class="card-header">
-                            <p class="card-header-title">Availble Students</p>
+                            <p class="card-header-title">Previous Result</p>
                         </div>
                         <div class="card-content">
-                            <?php
-                            if (isset($_POST['submit'])) {
-                                $classno = $_POST['classno'];
-                                $data = $students->getStudentByClassno($classno);
-                                foreach ($data as $row) {
-                                    echo "<div class='columns is-multiline is-mobile is-fullwidth'>";
-                                    echo "<div class='column'>";
-                                    echo $row['name'];
-                                    echo "</div>";
-                                    echo "<div class='column'>";
-                                    echo $row['classno'];
-                                    echo "</div>";
-                                    echo "<div class='column'>";
-                                    echo "<button class='button is-small is-danger' onclick='window.location.href=\"deletestudent.php?id=" . $row['id'] . "\"'>Delete</button>";
-                                    echo "</div>";
-                                    echo "</div>";
-                                }
-                            }
-                            ?>
+
                         </div>
                     </div>
                     <br />
