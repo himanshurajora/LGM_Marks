@@ -11,6 +11,14 @@
             $statement->execute();
             return $statement->fetchAll(PDO::FETCH_ASSOC);
         }
+        function getSubjectsInClass($classno){
+            $query = "SELECT * FROM Subjects WHERE ClassNo = :classno";
+            $statement = $this->connect->prepare($query);
+            $statement->bindParam(":classno", $classno, PDO::PARAM_INT);
+            $statement->execute();
+            return $statement->fetchAll(PDO::FETCH_ASSOC);
+        }
+
         function getNumberOfSubjects(){
             $query = "SELECT name FROM Subjects";
             $statement = $this->connect->prepare($query);
