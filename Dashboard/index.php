@@ -27,10 +27,45 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <p class="card-header-title">Header</p>
+                            <p class="card-header-title">Total Classes</p>
                         </div>
                         <div class="card-content">
-                            <div class="content">Content</div>
+                            <div class="content">
+                                <?php
+                                    require_once('../Database/HomeData.php');
+                                    $homeData = new HomeData();
+                                    $data = $homeData->getNumberOfClasses();
+                                    echo '<p class="title is-2">'.$data.'</p>';
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="card">
+                        <div class="card-header">
+                            <p class="card-header-title">Total Subjects</p>
+                        </div>
+                        <div class="card-content">
+                            <div class="content">
+                                <?php
+                                    $data = $homeData->getNumberOfSubjects();
+                                    echo '<p class="title is-2">'.$data.'</p>';
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="card">
+                        <div class="card-header">
+                            <p class="card-header-title">Total Students</p>
+                        </div>
+                        <div class="card-content">
+                            <div class="content">
+                                <?php
+                                    $data = $homeData->getNumberOfStudents();
+                                    echo '<p class="title is-2">'.$data.'</p>';
+                                ?>
+                            </div>
                         </div>
                     </div>
                     <br />
